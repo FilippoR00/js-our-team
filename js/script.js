@@ -1,3 +1,4 @@
+// array dati 
 const people = [
     {
         name: "Angela Caroll",
@@ -28,8 +29,8 @@ const people = [
 
 let team = document.querySelector(".team-container");
 
-
-function addCard(array){
+// Creo un ciclo che inzializzi in modo dinamico la pagina una volta richiamato
+function printCard(array){
     for (let i = 0; i < array.length; i++) {
         team.innerHTML += `
         <div class="team-card">
@@ -42,8 +43,36 @@ function addCard(array){
             </div>
         </div>
         `;
-        
     }
 }
 
-addCard(people);
+printCard(people);
+
+
+// ***** BONUS *****
+
+const button = document.getElementById("addMemberButton");
+
+// creo il comando in modo che il bottone una volta premuto registri i valori inseriti e li inserisca nell'array. poi inserisco l'ultimo elemento dell'array all'interno dell'HTML
+button.addEventListener("click", function(){
+    const addName = document.getElementById("name").value;
+    const addRole = document.getElementById("role").value;
+    const addImage = document.getElementById("image").value;
+    people.push({
+        name: addName,
+        role: addRole,
+        image: addImage
+    });
+    team.innerHTML += `
+        <div class="team-card">
+            <div class="card-image">
+                <img src="img/${people[people.length - 1].image}" alt="${people[people.length - 1].name}"/>
+            </div>
+            <div class="card-text">
+                <h3>${people[people.length - 1].name}</h3>
+                <p>${people[people.length - 1].role}</p>
+            </div>
+        </div>
+        `;
+    console.log(addName, addRole, addImage);
+});
